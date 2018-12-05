@@ -1,0 +1,119 @@
+.bodyall{
+    width: 75%;
+    margin:10% auto;
+}
+input::-webkit-input-placeholder {
+    border:0px;
+    background:rgba(0, 0, 0, 0);
+}
+input,textarea,select,a:focus {
+    outline: none;
+    background-color:transparent
+}
+input{background:transparent;}
+img {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    /* min-width: 1000px; */
+    z-index:-10;
+    zoom: 1;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center center;
+    background-size:auto;
+}
+.bodyall h2{
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+}
+.bodyall .form-control{
+    width: 100%;
+    height:40px;
+    margin: 35px auto;
+    border-radius: 30px;
+    margin-bottom: 25px;
+    background-color:rgba(0,0,0,0.001);
+    border: 1.5px solid #fff;
+}
+span{
+    margin-left: 5px;
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
+    width: 15px;
+    height: 15px;
+}
+.inputtext{
+    border: none;
+    padding-left: 6%;
+    overflow: hidden;
+    background-color:rgba(0,0,0,0.001);
+}
+#btn{
+    background-color: #253a7c;
+    width: 100%;
+    height:40px;
+    margin: 50px auto;
+    border-radius: 30px;
+    margin-bottom: 25px;
+}
+
+#btn p{
+    font-size: 17px;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    line-height: 40px;
+}
+.or{
+    font-size: 18px;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight:400;
+    text-align: center;
+}
+#otherbtn{
+    background-color: #6788ce;
+    width: 100%;
+    height:40px;
+    margin: 15px auto;
+    border-radius: 30px;
+    margin-bottom: 25px;
+}
+#otherbtn p{
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+    line-height: 40px;
+}
+.gologin{
+    margin-top: 50px;
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    border: none;
+}
+.gologin p{
+    color: #dfdfdf;
+    line-height: 25px;
+    font-size: 14px;
+    font-weight: 540;
+    display: inline;
+}
+.gologin a{
+    color: #fff;
+    line-height: 25px;
+    font-size: 14px;
+    font-weight: 550;
+}
