@@ -1,1 +1,179 @@
+<template>
+  <div>
+    <header>
+      <wv-swipe :height="150" :autoplay="3000">
+        <wv-swipe-item>
+          <img src="../../assets/images/lunbo_01.jpg">
+        </wv-swipe-item>
+        <wv-swipe-item>
+          <img src="../../assets/images/lunbo_02.jpg">
+        </wv-swipe-item>
+        <wv-swipe-item>
+          <img src="../../assets/images/lunbo_03.jpg">
+        </wv-swipe-item>
+        <wv-swipe-item>
+          <img src="../../assets/images/lunbo_04.jpg">
+        </wv-swipe-item>
+      </wv-swipe>
+    </header>
+    <div class="nav">
+      <wv-tabs swipeable>
+        <!-- <wv-tab v-for="index in 4" :title="'标签 ' + index"></wv-tab> -->
+      </wv-tabs>
+    </div>
+    <div class="content">
+      <ul>
+        <li>
+          <a class="cent_abstract">
+            <div class="cent_img">
+              <img src="../../assets/images/lunbo_02.jpg" alt>
+            </div>
+            <div class="briefly">
+              <a href="#">一套简洁高效的 vue 组件库,封装了 weui.css,其一系列组件适合微信等移动端 web 应用开发</a>
+            </div>
+            <div class="operation">
+              <div class="comment">
+                <img src="../../assets/images/good.png" alt>
+                <span href>203</span>
+              </div>
+              <div class="thumbs-up">
+                <img src="../../assets/images/comment29.png" alt>
+                <span href>445</span>
+              </div>
+              <div class="share">
+                <img src="../../assets/images/fenxiang.png" alt>
+                <span href>23</span>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="user">
+              <img src="../../assets/images/lunbo_04.jpg" alt>
+              <span>夏目南生</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="cent_abstract">
+            <div class="cent_img">
+              <img src="../../assets/images/lunbo_02.jpg" alt>
+            </div>
+            <div class="briefly">
+              <a href="#">一套简洁高效的 vue 组件库,封装了 weui.css,其一系列组件适合微信等移动端 web 应用开发</a>
+            </div>
+            <div class="operation">
+              <div class="comment">
+                <img src="../../assets/images/good.png" alt>
+                <span href>203</span>
+              </div>
+              <div class="thumbs-up">
+                <img src="../../assets/images/comment29.png" alt>
+                <span href>445</span>
+              </div>
+              <div class="share">
+                <img src="../../assets/images/fenxiang.png" alt>
+                <span href>23</span>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="user">
+              <img src="../../assets/images/lunbo_04.jpg" alt>
+              <span>夏目南生</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="cent_abstract">
+            <div class="cent_img">
+              <img src="../../assets/images/lunbo_02.jpg" alt>
+            </div>
+            <div class="briefly">
+              <a href="#">一套简洁高效的 vue 组件库,封装了 weui.css,其一系列组件适合微信等移动端 web 应用开发</a>
+            </div>
+            <div class="operation">
+              <div class="comment">
+                <img src="../../assets/images/good.png" alt>
+                <span href>203</span>
+              </div>
+              <div class="thumbs-up">
+                <img src="../../assets/images/comment29.png" alt>
+                <span href>445</span>
+              </div>
+              <div class="share">
+                <img src="../../assets/images/fenxiang.png" alt>
+                <span href>23</span>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="user">
+              <img src="../../assets/images/lunbo_04.jpg" alt>
+              <span>夏目南生</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="cent_abstract">
+            <div class="cent_img">
+              <img src="../../assets/images/lunbo_02.jpg" alt>
+            </div>
+            <div class="briefly">
+              <a href="#">一套简洁高效的 vue 组件库,封装了 weui.css,其一系列组件适合微信等移动端 web 应用开发</a>
+            </div>
+            <div class="operation">
+              <div class="comment">
+                <img src="../../assets/images/good.png" alt>
+                <span href>203</span>
+              </div>
+              <div class="thumbs-up">
+                <img src="../../assets/images/comment29.png" alt>
+                <span href>445</span>
+              </div>
+              <div class="share">
+                <img src="../../assets/images/fenxiang.png" alt>
+                <span href>23</span>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="user">
+              <img src="../../assets/images/lunbo_04.jpg" alt>
+              <span>夏目南生</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="cent_abstract">
+            <div class="cent_img">
+              <img src="../../assets/images/lunbo_02.jpg" alt>
+            </div>
+            <div class="briefly">
+              <a href="#">一套简洁高效的 vue 组件库,封装了 weui.css,其一系列组件适合微信等移动端 web 应用开发</a>
+            </div>
+            <div class="operation">
+              <div class="comment">
+                <img src="../../assets/images/good.png" alt>
+                <span href>203</span>
+              </div>
+              <div class="thumbs-up">
+                <img src="../../assets/images/comment29.png" alt>
+                <span href>445</span>
+              </div>
+              <div class="share">
+                <img src="../../assets/images/fenxiang.png" alt>
+                <span href>23</span>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="user">
+              <img src="../../assets/images/lunbo_04.jpg" alt>
+              <span>夏目南生</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
 
+
+<style scoped>
+@import "../../assets/css/index.css";
+</style>

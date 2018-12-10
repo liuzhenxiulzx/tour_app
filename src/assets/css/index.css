@@ -1,0 +1,156 @@
+body{
+    background-color: #f1f1f1;
+    margin: 0px;
+}
+a{
+    text-decoration: none;
+}
+/*底部按钮 */
+.fixed-footer{
+    background-color: #fff;
+    width: 100%;
+    height: 4.55rem;
+    position: fixed;
+    bottom: 0px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 100;
+}
+.fixed-footer ul{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.fixed-footer ul li{
+    float: left;
+    list-style: none; 
+    width: 19.37%;
+    height: 100%;
+    background-color: #fff;
+    margin-left: 2px;
+    text-align: center;
+    margin-top:0.35em;
+}
+ul li a{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.fixed-footer li p{
+    display: inline-block;
+    font-size: 1.2rem;
+    color:#666;
+}
+ul li img{
+    width: 1.9rem;
+    height: 1.9rem;
+    display:block;
+    margin: 0 auto;
+    text-align: center;
+} 
+/* ++++++++++++++++ */
+/* 幻灯片 */
+header{
+    width: 100%;
+    background-color: #fff;
+}
+header img{
+    width: 100%;
+    height: 100%;
+}
+/* 导航部分 */
+.nav{
+    width: 100%;
+}
+/*内容部分 */
+.content{
+    width: 94.5%;
+    height: 100%;
+    margin: 1.1rem auto; 
+}
+.content ul li{
+    list-style: none;
+    width: 48.4%;
+    background-color: #fff;
+    float: right;
+    margin-bottom: 12px;
+    border-radius: 0.8rem;
+}
+.content ul li:nth-child(odd){
+    list-style: none;
+    background-color: #fff;
+    float: left;
+    margin-bottom: 12px;
+}
+.content .cent_abstract{
+    /* margin-right: 0px; */
+}
+.cent_abstract .cent_img img{
+    width: 100%;
+    height: 60%;
+    border-radius: 0.8rem 0.8rem 0rem 0rem;
+}
+.cent_abstract .briefly a{
+    margin:5px 5px;
+    color:black;
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2; 
+}
+.cent_abstract .line{
+    width: 90%;
+    height: 1px;
+    background-color: #eee;
+    margin: 1rem auto;
+}
+
+
+.user{
+    width: 100%;
+    height: 10%;
+    margin-bottom: 4px;
+}
+.user .user_head{
+    display: inline-block;
+}
+.user img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 5rem;
+    margin-left: 1rem;
+    display: inline;
+}
+.user span{
+    display: inline-block;
+    font-size: 1.2rem;
+    vertical-align:middle;
+    margin-left: 1rem;
+}
+.operation img{
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    
+}
+.operation span{
+    display: inline-block;
+    font-size: 11px;
+    margin-left: 0.5rem;
+    vertical-align:middle;
+    color: #8590a6;
+}
+.operation .comment{
+    display: inline-block;
+    margin-left: 0.5em;
+}
+.operation .thumbs-up{
+    margin-left: 0.8em;
+    display: inline-block;
+}
+.operation .share{
+    margin-left: 1em;
+    display: inline-block;
+}
