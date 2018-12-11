@@ -38,6 +38,7 @@ header span{
     height: 50px;
     background-color: #fff;
     position: relative;
+    display: block;
 }
 .private_letter img{
     width: 3rem;
@@ -50,6 +51,7 @@ header span{
 .private_letter p{
     display: inline-block;
     position: absolute;
+    color: black;
     font-weight: 600;
     float: left;
     left: 6rem;
@@ -99,7 +101,7 @@ header span{
     margin: 0 auto;
     border-bottom:1px solid #eee;
 }
-.all_notice .head img{
+.all_notice .head #head_img{
     width: 5rem;
     height: 5rem;
     border-radius: 2.5rem;
@@ -113,4 +115,190 @@ header span{
 }
 .head .username span{
     color:cornflowerblue;
+}
+
+.head .time{
+    font-family: '宋体';
+    color: #8590a6;
+    font-style:normal;
+    font-size: 1rem;
+    display: inline-block;
+    text-align: center;
+    float: right;
+    margin-top: -3.5rem;
+}
+.head .times{
+    font-family: '宋体';
+    color: #8590a6;
+    font-style:normal;
+    font-size: 1rem;
+    display: inline-block;
+    text-align: center;
+    float: right;
+    margin-top: -8.8rem;
+}
+
+.head .article #article_img{
+    width: 5rem;
+    height: 5rem;
+    margin-left: 6rem;
+}
+.article .article_content{
+    width: 16rem;
+    display: inline-block;
+    float: right;
+    color: #8590a6;
+    margin-top: -4.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2 ;
+    overflow: hidden;
+}
+
+/* 私信列表 */
+.news ul{
+    width: 100%;
+    background-color: #fff;
+    
+}
+.news ul li{
+    list-style: none;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+.news .private_head img{
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
+}
+.news .news_source{
+    float: left;
+    margin-left: 7rem;
+    margin-top: -5rem;
+    font-family: '宋体';
+    font-weight: 550;
+    color: black;
+}
+.news li .newcontent{
+    color: #8590a6;
+    font-size: 1.2rem;
+    float: left;
+    margin-left: 7rem;
+    margin-top: -2rem;
+}
+
+
+/* 消息发送页 */
+.all_conten{
+    width: 93%;
+    margin: 0 auto;
+}
+.all_conten .form_new img,.all_conten .to_new img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
+}
+.all_conten .form_new{
+    margin: 1rem 0 2rem 0;
+    position: relative;
+    float: left;
+}
+
+.all_conten .form_new .formnew_content{
+    font-size: 1.5rem;
+    color:black;
+    font-family: '楷体';
+    background-color: #fff;
+    max-width:60%;
+    border-radius: 0.8rem;
+    padding: 0.5rem 0.7rem;
+    margin-left: 7rem;
+    margin-top: -5rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+   
+}
+.all_conten .formnew_content i{
+    display:block;
+    border-width:1rem 1rem 1rem 0;
+    border-style:solid;
+    border-color:transparent #fff transparent transparent;
+    position:absolute;
+    top:1.5rem;
+    left:6rem;
+}
+.all_conten .to_new{
+    float: right;
+    margin: 1rem 0 2rem 0;
+    position: relative;
+}
+.all_conten .to_new img{
+    float: right;
+    text-align: center;
+}
+.all_conten .to_new .tonew_content{
+    float: right;
+    font-size: 1.5rem;
+    color:black;
+    font-family: '楷体';
+    background-color: #1ed26c6e;
+    max-width:60%;
+    border-radius: 0.8rem;
+    padding: 0.5rem 0.7rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    margin-right: 2rem;
+
+}
+.all_conten .tonew_content i{
+    display:block;
+    position:absolute;
+    top:2rem;
+    right:5rem;
+    border: 1rem solid transparent;
+    border-left: 1rem solid #1ed26c6e;
+}
+.footer_send{
+    width: 100%;
+    height: 4.55rem; 
+    background-color: #fff;   
+    position: fixed;
+    bottom: 0px;
+}
+.footer_send .voice{
+    width: 4rem;
+    height: 100%;
+    margin: 1rem 1rem;
+}
+.footer_send #viceimg{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.footer_send .input_box{
+    float: left;
+    width:20rem;
+    height: 3rem;
+    border:1px solid #979797;
+    border-radius: 3rem;
+    margin-top: -5.75rem;
+    margin-left: 5rem;
+    outline:none;
+    padding-left:10px;
+}
+.footer_send .send{
+    background-color: #FFC107;
+    width: 5rem;
+    height: 3rem;
+    float: right;
+    margin-top: -5.75rem;
+    margin-right:1rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+    font-weight: 600;
 }

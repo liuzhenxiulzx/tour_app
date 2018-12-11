@@ -7,7 +7,7 @@ import 'bootstrap'
 
 import WeVue from 'we-vue'
 import 'we-vue/lib/style.css'
-import { Swipe, SwipeItem,Tabs,Tab,Cell,Panel, MediaBox } from 'we-vue'
+import { Swipe, SwipeItem,Tabs,Tab,Cell,Panel, MediaBox,SearchBar,Badge  } from 'we-vue'
 
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
@@ -16,7 +16,8 @@ Vue.config.productionTip = false
 Vue.use(WeVue)
 Vue.use(Cell)
 Vue.use(Panel).use(MediaBox)
-
+Vue.use(SearchBar)
+Vue.use(Badge)
 
 new Vue({
   router,

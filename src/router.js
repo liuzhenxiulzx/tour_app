@@ -43,7 +43,7 @@ export default new Router({
           meta:{
             title:'聊天'
           },
-          component: () => import('./views/chat/index.vue')
+          component: () => import('./views/chat/index.vue'),
         },
         {
           path: '/myself',
@@ -53,6 +53,14 @@ export default new Router({
           },
           component: () => import('./views/myself/index.vue')
         },
+        {
+          path: '/privatenews',
+          name: 'privatenews',
+          meta:{
+            title:'私信'
+          },
+          component: () => import('./views/chat/privatenews.vue')
+        }
       ]
     },
     {
@@ -82,6 +90,23 @@ export default new Router({
       path: '/welcome',
       name: 'welcome',
       component: () => import('./views/index/welcome.vue')
-    }
+    },
+    {
+      path: '/privatechat',
+      name: 'privatechat',
+      meta:{
+        title:'私聊'
+      },
+      component: () => import('./views/chat/privatechat.vue')
+    },
+    {
+      path: '/details',
+      name: 'details',
+      meta:{
+        title:'文章详情'
+      },
+      component: () => import('./views/index/details.vue')
+    },
+    
   ]
 })
