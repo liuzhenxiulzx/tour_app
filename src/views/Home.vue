@@ -4,7 +4,7 @@
     <footer class="fixed-footer">
       <ul>
         <li class="active">
-          <router-link to="/index">
+          <router-link to="/">
             <img src="../assets/images/nav_index.png">
             <p>首页</p>
           </router-link>

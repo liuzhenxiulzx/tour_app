@@ -14,7 +14,7 @@ export default new Router({
       component: Home,
       children:[
         {
-          path: '/index',
+          path: '',
           name: 'index',
           meta:{
             title:'首页'
@@ -106,6 +106,22 @@ export default new Router({
         title:'文章详情'
       },
       component: () => import('./views/index/details.vue')
+    },
+    {
+      path: '/followme',
+      name: 'followme',
+      meta:{
+        title:'关注我的人'
+      },
+      component: () => import('./views/myself/followme.vue')
+    },
+    {
+      path: '/myfollow',
+      name: 'myfollow',
+      meta:{
+        title:'我关注的人'
+      },
+      component: () => import('./views/myself/myfollow.vue')
     },
     
   ]

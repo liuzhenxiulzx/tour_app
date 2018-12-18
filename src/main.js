@@ -7,7 +7,7 @@ import 'bootstrap'
 
 import WeVue from 'we-vue'
 import 'we-vue/lib/style.css'
-import { Swipe, SwipeItem,Button ,Tabs,Tab,Cell,Panel, MediaBox,SearchBar,Badge  } from 'we-vue'
+import { Swipe, SwipeItem,DatetimePicker,Progress ,Button ,Tabs,Tab,Cell,Panel, MediaBox,SearchBar,Badge  } from 'we-vue'
 
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
@@ -19,6 +19,8 @@ Vue.use(Panel).use(MediaBox)
 Vue.use(SearchBar)
 Vue.use(Badge)
 Vue.use(Button)
+Vue.use(Progress)
+Vue.use(DatetimePicker)
 
 new Vue({
   router,

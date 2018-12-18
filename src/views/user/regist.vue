@@ -16,8 +16,8 @@
 				<input type="password" class="inputtext" placeholder="确认密码">
 			</div>
 			<div  class="form-control">
-				<span><i class="glyphicon glyphicon-envelope"></i></span>
-				<input type="text" class="inputtext" placeholder="邮箱">
+				<span><i class="glyphicon glyphicon-earphone"></i></span>
+				<input type="text" class="inputtext" placeholder="手机号">
 			</div>
 			<div  class="form-control" id="btn">
 				<p>马上注册</p>

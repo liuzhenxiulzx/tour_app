@@ -18,12 +18,12 @@
       <div class="follow">
         <ul>
           <li>
+            <router-link to="/followme">关注我的人</router-link>
             <span>23</span>
-            <a href>关注我的人</a>
           </li>
           <li>
+            <router-link to="/myfollow">我关注的人</router-link>
             <span>34</span>
-            <a href>我关注的人</a>
           </li>
         </ul>
       </div>
@@ -31,16 +31,17 @@
     <div class="list">
       <wv-group>
         <wv-cell title="我的作品" is-link to="/">
-          <img :src="imgIcon" alt slot="icon" class="cell-icon">
+         <!-- <img :src="imgIcon" alt slot="icon" class="cell-icon"> -->
+          <img alt slot="icon" class="cell-icon">
         </wv-cell>
         <wv-cell title="最近浏览" is-link to="/">
-          <img :src="imgIcon" alt slot="icon" class="cell-icon">
+          <img alt slot="icon" class="cell-icon">
         </wv-cell>
         <wv-cell title="帮助" is-link to="/">
-          <img :src="imgIcon" alt slot="icon" class="cell-icon">
+          <img alt slot="icon" class="cell-icon">
         </wv-cell>
         <wv-cell title="设置" is-link to="/">
-          <img :src="imgIcon" alt slot="icon" class="cell-icon">
+          <img alt slot="icon" class="cell-icon">
         </wv-cell>
       </wv-group>
     </div>

@@ -18,7 +18,7 @@
     </header>
     <div class="nav">
       <wv-tabs swipeable>
-        <!-- <wv-tab v-for="index in 4" :title="'标签 ' + index"></wv-tab> -->
+        <wv-tab v-for="(v,k) in titlebar" :key="k" :title="v.title">内容</wv-tab>
       </wv-tabs>
     </div>
     <div class="content">
@@ -206,3 +206,23 @@
 <style scoped>
 @import "../../assets/css/index.css";
 </style>
+
+<script>
+export default {
+  data(){
+    return{
+      titlebar:[
+        {
+          title:'最新',
+        },
+        {
+          title:'热门',
+        },
+        {
+          title:'排行',
+        }
+      ]
+    }
+  }
+}
+</script>
