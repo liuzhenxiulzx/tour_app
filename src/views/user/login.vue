@@ -6,23 +6,21 @@
         
 		<div class="bodyall">
 			<h2>登陆</h2>
-       		<form action="#" method="post">
 			<div  class="form-control">
 				<span><i class="glyphicon glyphicon-user"></i></span>
-				<input type="text" class="inputtext" placeholder="用户名">
+				<input type="text" style="BACKGROUND-COLOR: transparent;" class="inputtext" v-model="logindata.username" placeholder="用户名">
 			</div>
 			<div  class="form-control">
 				<span><i class="glyphicon glyphicon-lock"></i></span>
-				<input type="password"  class="inputtext" placeholder="密码">
+				<input type="password" style="BACKGROUND-COLOR: transparent;"  autocomplete="off" class="inputtext" v-model="logindata.password" placeholder="密码">
 			</div>
-			<div  id="btn">
+			<div @click="dologin" id="btn">
 				<p>马上登陆</p>
 			</div>
             <p class="or">或</p>
             <div  id="otherbtn">
 				<p>使用QQ登陆</p>
 			</div>
-			</form>
 			<div class="gologin">
 				<p>还没有账户？</p>
 				<a href="#">&nbsp;马上注册</a>
@@ -32,8 +30,45 @@
 </template>
 
 <script>
+import { Toast } from 'we-vue'
 export default {
-	
+	data(){
+		return{
+			logindata:{
+				username:'',
+				password:''
+			}
+		}
+	},
+	methods:{
+		dologin(){
+			this.axios.post('/authorizations',this.logindata)
+			.then(res=>{
+				if(res.data.status_code == 200)
+				{
+					// 设置token
+                    localStorage.setItem('ACCESS_TOKEN',res.data.data.ACCESS_TOKEN);
+					
+					this.$router.push('/');
+					
+				}
+				else if(res.data.status_code == 403)
+				{
+					Toast.fail({
+						duration: 1000,
+						message: '账号不存在'
+					})
+				}
+				else
+				{
+					Toast.fail({
+						duration: 1000,
+						message: '密码错误'
+					})
+				}
+			});
+		}
+	},
 }
 </script>
 
