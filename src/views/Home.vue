@@ -15,7 +15,7 @@
             <p>收藏</p>
           </router-link>
         </li>
-        <li>
+        <li @click="fabu">
           <router-link to="/release">
             <img src="../assets/images/photo.png">
             <p>发布</p>
@@ -42,4 +42,20 @@
 <style scoped>
 @import "../assets/css/index.css";
 </style>
+
+<script>
+export default {
+    data(){
+      return{
+        
+      }
+    },
+    methods:{
+      fabu(){
+        
+      }
+    }
+}
+</script>
+
 

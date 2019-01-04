@@ -54,3 +54,80 @@ header span{
    width: 94%;
    height: 1px;
 }
+
+
+/* 收藏样式 */
+.one{
+    position: relative;
+    width: 90%;
+    height: 8rem;
+    box-shadow: #ccc 0px 0px 10px 2px ;
+    margin-top: 3rem;
+    margin-left: 5%;
+    background-color: #fff;
+}
+.one .serial{
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    margin-left:-1rem;
+    border-radius: 1.5rem;
+    background-color: yellow;
+    text-align: center;
+    font-size: 0.2rem;
+    line-height: 3rem;
+    color: #999;
+    position: absolute;
+    top:32%;
+}
+.one .img img{
+    position: absolute;
+    margin-top: -2rem;
+    width: 8rem;
+    margin-left: 3rem;
+    border-radius: 10px;
+}
+.one .title{
+    width: 60%;
+    height: 10rem;
+    margin-left: 38%;
+    float: left;
+}
+.one .title h4{
+    display: inline-block;
+    font-size: 1.2rem;
+    color: #07080aa3;
+    font-weight: 600;
+    max-width: 20rem;
+    overflow: hidden;
+    line-height: 1.8rem;
+    /*文字超出用省略号*/
+    text-overflow:ellipsis;
+    /*盒子模型*/
+    display:-webkit-box;
+    /*显示的文本行数*/
+    -webkit-line-clamp:2;
+    /*子元素的垂直排列方式*/
+    -webkit-box-orient:vertical;
+}
+.one .title p{
+    width: 100%;
+    height: 2rem;
+    float: left;
+    margin-top: 0rem;
+}
+.one .title p i{
+    float: left;
+    width: 30px;
+    height: 30px;
+    font-size:1.2rem;
+}
+.one .title p b{
+    float: left;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #999;
+    margin-top: -0.5rem;
+    margin-right: 4rem;
+    margin-left: -1rem;
+}

@@ -18,12 +18,14 @@ a:hover{
     margin: 0px;
     padding: 0px;
     z-index: 100;
+   
 }
 .fixed-footer ul{
     height: 100%;
     width: 100%;
     margin: 0px;
     padding: 0px;
+    box-shadow: #eee 0px 0px 10px 2px;
 }
 .fixed-footer ul li{
     float: left;
@@ -67,12 +69,17 @@ header img{
     width: 100%;
 }
 /*内容部分 */
+.interval{
+    height: 5rem;
+    width: 100%;
+    float: left;
+}
 .content{
     width: 94.5%;
     height: 100%;
     margin: 1.1rem auto; 
-    padding-bottom: 4rem;
 }
+
 .content ul li{
     list-style: none;
     width: 48.4%;
