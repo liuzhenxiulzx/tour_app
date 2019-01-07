@@ -32,6 +32,7 @@
 				<i class="glyphicon glyphicon-comment"></i><b>246</b>
 			</p>
 		</div>
+    
 	</div>
   	<div class="one">
 		<span class="serial">11.02</span>
@@ -43,6 +44,7 @@
 				<i class="glyphicon glyphicon-comment"></i><b>246</b>
 			</p>
 		</div>
+
 	</div>
   	<div class="one">
 		<span class="serial">11.02</span>

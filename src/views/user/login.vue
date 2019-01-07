@@ -48,6 +48,7 @@ export default {
 				{
 					// 设置token
                     localStorage.setItem('ACCESS_TOKEN',res.data.data.ACCESS_TOKEN);
+                    localStorage.setItem('USER_ID',res.data.data.USER_ID);
 					
 					this.$router.push('/');
 					
