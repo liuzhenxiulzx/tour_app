@@ -1,12 +1,12 @@
 <template>
   <div>
     <header>
-      <a class="return">
+      <!-- <a class="return">
         <img src="../../assets/images/return.png" alt>
-      </a>
+      </a> -->
       <span>我的收藏</span>
       <div class="search">
-         <img src="../../assets/images/search2.png" alt>
+         <!-- <img src="../../assets/images/search2.png" alt> -->
       </div>
     </header>
 
@@ -64,7 +64,7 @@
 </template>
 
 <style scoped>
-@import "../../assets/css/style.css";
+@import "../../assets/css/release.css";
 
 </style>
 

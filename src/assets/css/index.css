@@ -47,6 +47,7 @@ ul li a{
     font-size: 1.2rem;
     color:#666;
 }
+
 ul li img{
     width: 1.9rem;
     height: 1.9rem;
@@ -54,6 +55,17 @@ ul li img{
     margin: 0 auto;
     text-align: center;
 } 
+
+.activebgc  a p{
+    color: yellow;
+}
+.activebgc  a img{
+    width: 1.9rem;
+    height: 1.9rem;
+    display:block;
+    margin: 0 auto;
+    text-align: center;
+}
 /* ++++++++++++++++ */
 /* 幻灯片 */
 header{
@@ -103,15 +115,17 @@ header img{
     border-radius: 0.8rem 0.8rem 0rem 0rem;
 }
 .cent_abstract .briefly a{
-    color:black;
+    color:rgb(56, 57, 54);
     text-decoration: none;
     overflow:hidden; 
     text-overflow:ellipsis;
     display:-webkit-box; 
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2; 
+    margin-left: 0.5rem;
+    padding-right: 0.35rem;
 }
-.cent_abstract .line{
+.line{
     width: 90%;
     height: 1px;
     background-color: #eee;
@@ -165,6 +179,17 @@ header img{
     margin-left: 1em;
     display: inline-block;
 }
+.user .time{
+    float: right;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    color:#ccc;
+    /* display: inline-block;
+    font-size: 1.2rem;
+    vertical-align:middle;
+    margin-left: 1rem; */
+}
+
 
 /* 文章详情 */
 header{

@@ -1,22 +1,16 @@
 <template>
   <div>
     <header>
-      <a class="return">
+      <router-link to="/" class="return">
         <img src="../../assets/images/return.png">
-      </a>
+      </router-link >
       <span>文章详情</span>
     </header>
 
     <!-- 文章内容 -->
     <div class="blog_conten">
       <div class="wrap">
-        在欧洲刑警组织（Europol）官方网站上，在发表的名为《OPSON VI行动》的报告中，列举了2016年12月至2017年3月
-        期间欧洲假冒伪劣食品和饮料的案例。报告披露波兰截获了66个托盘（约22吨）的“非法奶粉”（illicit powdered milk），估计约值7万欧元，报告称当时调查正在进行中。
-        今年4月，西班牙查获8吨被指冒名牌拟运向中国的婴幼儿配方奶粉，涉案奶粉重达8吨、多达1.3万盒。
-        在这些“洋奶粉”事件之中，问题奶粉的爆发范围之广，涉案奶粉的体量之大令国内外消费者深感不安，仿佛心中“奶粉安全”的最后一道防线也被击破。
-        “三聚氰胺”的十年余震,国外奶粉市场状况百出，国内奶粉市场占比却没有很大的改观。
-        从目前国内外品牌在的婴幼儿奶粉的市场占有率上看，国外品牌依旧占据主流，在星图数据公布的今
-        年第一季度的婴幼儿奶粉品牌线上销售TOP10品牌中，上榜的仅有伊利和飞鹤两个品牌，榜单大部分仍被进口奶粉品牌占据。
+        {{details.content}}
       </div>
       <div class="author">
         <div class="guide-pic-sm">
@@ -125,3 +119,24 @@
 <style scoped>
 @import "../../assets/css/index.css";
 </style>
+
+
+<script>
+export default {
+    data(){
+        return {
+            details:"",
+        }
+    },
+    methods:{
+        
+    },
+    created:function(){
+        this.axios.get('/details/'+this.$route.params.id)
+        .then(res=>{
+           this.details = res.data.data
+           console.log(res.data.data)
+        })
+    }
+}
+</script>

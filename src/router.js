@@ -100,7 +100,7 @@ export default new Router({
       component: () => import('./views/chat/privatechat.vue')
     },
     {
-      path: '/details',
+      path: '/details/:id',
       name: 'details',
       meta:{
         title:'文章详情'
