@@ -19,8 +19,10 @@
         <div class="guide-name-sm">飞奔的蜗牛</div>
 
         <div class="guide-contact">
-          <a href="guide-info.html">关注</a>
-          <img src="../../assets/images/chat_add.png" alt="">
+          <!-- <a @click="cancelfollow" >已关注</a> -->
+          <a @click="follow">关注</a>
+          
+          <!-- <img  @click="follow" src="../../assets/images/chat_add.png" alt=""> -->
         </div>
       </div>
     </div>
@@ -31,11 +33,12 @@
             <div class="container">
                 评论（2200）
             </div>
-            <input type="text" class="comment-input" placeholder="写评论">
-            <input type="button" value="发送" class="comment-send">
+            <input type="text" v-model="commentAll.comment" class="comment-input" placeholder="写评论">
+            <input type="button" @click="send" value="发送" class="comment-send">
         </div>
         <div class="comment-list">
-            <div class="comment-sub">
+
+            <div class="comment-sub" v-for="(v,k) in comlist" :key="k">
                 <div class="comment-sub-title">
                     <div class="comment-pic">
                          <img src="../../assets/images/lunbo_01.jpg" alt="">
@@ -43,56 +46,21 @@
                     <div class="comment-info">
                         <div class="comment-name">
                             飞奔的蜗牛
-                        </div>
+                        </div>  
                         <div class="comment-time">
-                            2018.01.01
+                            {{v.created_at}}
                         </div>
                     </div>
                 </div>
                 <div class="comment-content">
-                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
+                   {{v.comment}}
                 </div>
             </div>
-             <div class="comment-sub">
-                <div class="comment-sub-title">
-                    <div class="comment-pic">
-                         <img src="../../assets/images/lunbo_01.jpg" alt="">
-                    </div>
-                    <div class="comment-info">
-                        <div class="comment-name">
-                            飞奔的蜗牛
-                        </div>
-                        <div class="comment-time">
-                            2018.01.01
-                        </div>
-                    </div>
-                </div>
-                <div class="comment-content">
-                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
-                </div>
-            </div>
-             <div class="comment-sub">
-                <div class="comment-sub-title">
-                    <div class="comment-pic">
-                         <img src="../../assets/images/lunbo_01.jpg" alt="">
-                    </div>
-                    <div class="comment-info">
-                        <div class="comment-name">
-                            飞奔的蜗牛
-                        </div>
-                        <div class="comment-time">
-                            2018.01.01
-                        </div>
-                    </div>
-                </div>
-                <div class="comment-content">
-                好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。
-                </div>
-            </div>
+         
         </div>
-        <div class="comment-more">
+        <!-- <div class="comment-more">
             加载全部评论
-        </div>
+        </div> -->
         <div class="comment-state">
             <div class="comment-like">
                  <img src="../../assets/images/like.png" alt="">
@@ -122,21 +90,93 @@
 
 
 <script>
+import { Toast } from 'we-vue'
 export default {
     data(){
         return {
             details:"",
+            commentAll:{
+                article_id:"",
+                comuser_id: localStorage.getItem("USER_ID"),
+                comment:''
+            },
+            comlist:"",  //评论信息
+            allid:{
+                my_id:localStorage.getItem("USER_ID"),
+                other_id:"",
+            },
         }
     },
     methods:{
-        
+        // 发表评论
+        send(){
+            this.commentAll.article_id = this.$route.params.id
+            this.axios.post('/comment',this.commentAll)
+            .then(res=>{
+                if(res.data.status_code==200){
+                    Toast.success('发表成功');
+                }
+                // 清空输入框
+                this.commentAll.comment = ''
+            })
+        },
+        // 添加关注
+        follow(){
+            if(this.allid.my_id==this.allid.other_id){
+                Toast.text({
+                    duration: 1000,
+                    message: '不可以关注自己哦'
+                })
+            }
+            else
+            {
+            
+                // 1.调用接口
+                this.axios.post('/follows',this.allid)
+                .then(res=>{
+                    if(res.data.status_code==422)
+                    {
+                        Toast.text({
+                            duration: 1000,
+                            message: '您已关注过了哦'
+                        })
+                    }
+                    else if(res.data.status_code==200)
+                    {
+                        Toast.success('关注成功');
+                    }
+                        
+                })
+
+            }
+        },
+        // 取消关注
+        cancelfollow(){
+            this.axios.post('/cancel',this.allid)
+            .then(res=>{
+              if(res.data.status_code==200){
+                   Toast.success('取消关注成功');
+              }
+            })
+        }
     },
     created:function(){
+        // 获取文章内容
         this.axios.get('/details/'+this.$route.params.id)
         .then(res=>{
            this.details = res.data.data
-           console.log(res.data.data)
+           //设置文章用户id
+           this.allid.other_id = this.details.user_id;
         })
+
+        //获取评论
+         this.axios.get('/getcomment/'+this.$route.params.id)
+        .then(res=>{
+           this.comlist = res.data.data
+        })
+        // console.log(this.allid)
+        // 
+        
     }
 }
 </script>

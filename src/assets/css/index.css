@@ -255,7 +255,7 @@ header span{
     margin-top: -0.5rem;
 }
 .author .guide-contact a{
-    margin-right: 1.1rem;
+    margin-right: -1.1rem;
     margin-top: -3.5rem;
 }
 /* 评论 */
@@ -295,12 +295,16 @@ header span{
 }
 .comment-box .comment-send{
     margin-left: 1.5rem;
-    width: 5rem;
+    width: 4rem;
     height: 3rem;
     border-radius: 0.5rem;
     border:none;
     background-color: #42c02e;
     color: #fff;
+    margin-right: 0.5rem;
+}
+.comment-send:hover{
+    outline:0 none !important;
 }
 .comment-list{
     background-color: #fff;
