@@ -39,7 +39,7 @@
               <span>{{v.comment_number}}</span>
             </div>
             <div class="share">
-              <img src="../../assets/images/fenxiang.png">
+              <img src="../../assets/images/collectionicon.png" @click="forward(v.id)">
               <span>23</span>
             </div>
           </div>
@@ -73,6 +73,10 @@ export default {
         article_id: "",
         isgoodup: "0" //是否点赞
       },
+      collect:{
+        user_id: localStorage.getItem("USER_ID"),
+        article_id: "",
+      }
     };
   },
   computed: {},
@@ -80,8 +84,45 @@ export default {
     this.axios.get("/showblog").then(res => {
       this.blog = res.data.data;
     });
+    // console.log(this.blog)
   },
   methods: {
+    // 文章转发
+    forward(key){
+       this.collect.article_id = key;
+        Dialog.confirm({
+          title: '',
+          message: '确定要收藏吗',
+          showCancelButton: true
+        }).then(() => {
+             
+              this.axios.post('/collection',this.collect)
+              .then(res=>{
+                  if(res.data.status_code==200){
+                    Toast.text({
+                      duration: 1000,
+                      message: '收藏成功'
+                    })
+                  }
+                  else if(res.data.status_code==422)
+                  {
+                     Toast.text({
+                      duration: 1000,
+                      message: '收藏失败'
+                    })
+                  }
+                  else if(res.data.status_code==400)
+                  {
+                     Toast.text({
+                      duration: 1000,
+                      message: '该文章已收藏'
+                    })
+                  }
+              })
+        }).catch(() => {
+
+        })
+    },
     switchbgi(key, item) {
       this.agree.article_id = key;
       // 1.点击时判断是否登录
@@ -90,7 +131,7 @@ export default {
       } else {
         Dialog.confirm({
           title: "",
-          message: "您还为登录哦,是否要登录",
+          message: "您还未登录哦,是否要登录",
           showCancelButton: true
         })
           .then(() => {
