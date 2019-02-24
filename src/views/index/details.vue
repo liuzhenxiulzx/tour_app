@@ -11,12 +11,16 @@
     <div class="blog_conten">
       <div class="wrap">
         {{details.content}}
+         <div>
+          <img :src="details.article_img" width="295px" height="250px" alt="">
+        </div>
       </div>
+     
       <div class="author">
         <div class="guide-pic-sm">
-          <img src="../../assets/images/article.jpg">
+          <img :src="author.header">
         </div>
-        <div class="guide-name-sm">飞奔的蜗牛</div>
+        <div class="guide-name-sm">{{author.username}}</div>
 
         <div class="guide-contact">
           <!-- <a @click="cancelfollow" >已关注</a> -->
@@ -31,7 +35,7 @@
     <div class="guide-comment">
         <div class="comment-box">
             <div class="container">
-                评论（2200）
+                评论（{{this.comlist.length}}）
             </div>
             <input type="text" v-model="commentAll.comment" class="comment-input" placeholder="写评论">
             <input type="button" @click="send" value="发送" class="comment-send">
@@ -105,17 +109,31 @@ export default {
                 my_id:localStorage.getItem("USER_ID"),
                 other_id:"",
             },
+            author:"",
+            addcomnumber:{ //添加文章数
+                id:"",
+                comment_number:""
+            }
         }
     },
     methods:{
         // 发表评论
         send(){
+            // 设置评论的文章
             this.commentAll.article_id = this.$route.params.id
+            // 设置文章id
+            this.addcomnumber.id = this.$route.params.id
+            // 设置评论数
+            this.addcomnumber.comment_number = this.details.comment_number + 1;
+
             this.axios.post('/comment',this.commentAll)
             .then(res=>{
                 if(res.data.status_code==200){
                     Toast.success('发表成功');
                 }
+                // 评论数加一
+                
+                this.axios.post('/addcommentnum',this.addcomnumber).then(res=>{})
                 // 清空输入框
                 this.commentAll.comment = ''
             })
@@ -166,16 +184,20 @@ export default {
         .then(res=>{
            this.details = res.data.data
            //设置文章用户id
-           this.allid.other_id = this.details.user_id;
+        //    this.allid.other_id = this.details.user_id;
+           this.author = this.details.user_id;
+                 // 获取文章作者信息
+                this.axios.get('/author/'+ res.data.data.user_id).then(res=>{
+                    this.author = res.data.data
+                })
         })
 
         //获取评论
          this.axios.get('/getcomment/'+this.$route.params.id)
         .then(res=>{
            this.comlist = res.data.data
+           
         })
-        // console.log(this.allid)
-        // 
         
     }
 }
