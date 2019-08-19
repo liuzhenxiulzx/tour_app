@@ -23,10 +23,8 @@
         <div class="guide-name-sm">{{author.username}}</div>
 
         <div class="guide-contact">
-          <!-- <a @click="cancelfollow" >已关注</a> -->
-          <a @click="follow">关注</a>
-          
-          <!-- <img  @click="follow" src="../../assets/images/chat_add.png" alt=""> -->
+          <a v-if="isfollow" @click="cancelfollow" >已关注</a>
+          <a v-else @click="follow">关注</a>
         </div>
       </div>
     </div>
@@ -49,7 +47,7 @@
                     </div>
                     <div class="comment-info">
                         <div class="comment-name">
-                            飞奔的蜗牛
+                            {{v.comentuser.username}}
                         </div>  
                         <div class="comment-time">
                             {{v.created_at}}
@@ -67,16 +65,21 @@
         </div> -->
         <div class="comment-state">
             <div class="comment-like">
-                 <img src="../../assets/images/like.png" alt="">
-                <span>2.9万</span>
+                 <img  v-if="details.goodup && details.goodup.isgoodup == 0" src="../../assets/images/index_like2.png" @click="switchbgiup()" alt>
+                 <img  v-else-if="details.goodup && details.goodup.isgoodup == 1" src="../../assets/images/like.png" @click="switchbgiup()" alt>
+                 <img  v-else src="../../assets/images/index_like2.png" @click="switchbgiup()" alt>
+                <span>{{details.goods_number}}</span>
             </div>
             <div class="comment-dislike">
-                 <img src="../../assets/images/dislike.png" alt="">
-                <span>1200</span>
+                 <img v-if="details.goodup && details.goodup.isgoodup == 2" src="../../assets/images/dislike2.png" @click="switchbgi()" alt="">
+                 <img v-else-if="details.goodup && details.goodup.isgoodup == 3" src="../../assets/images/dislike.png" @click="switchbgi()" alt="">
+                 <img v-else src="../../assets/images/dislike.png" @click="switchbgi()" alt="">
+                <span>{{details.negative_comment}}</span>
             </div>
             <div class="comment-love">
-                 <img src="../../assets/images/love.png" alt="">
-                <span>2200</span>
+                 <img v-if="details.collections && details.collections.iscollection == 1" src="../../assets/images/star_chk.png" @click="forward()" alt="">
+                 <img v-else src="../../assets/images/star_no.png" @click="cancelforward()" alt="">
+                <span>{{details.collect_number}}</span>
             </div>
             <div class="comment-share">
                  <img src="../../assets/images/share.png" alt="">
@@ -96,9 +99,11 @@
 <script>
 import { Toast } from 'we-vue'
 export default {
+    inject:['reload'],
     data(){
         return {
             details:"",
+            article_id: '',
             commentAll:{
                 article_id:"",
                 comuser_id: localStorage.getItem("USER_ID"),
@@ -113,6 +118,22 @@ export default {
             addcomnumber:{ //添加文章数
                 id:"",
                 comment_number:""
+            },
+            bloguserid:'',
+            isfollow:false,
+            gree: { //点赞信息
+                upuser_id: localStorage.getItem("USER_ID"),
+                article_id: "",
+                isgoodup: "",
+            },
+           collect:{ //收藏信息
+                user_id: localStorage.getItem("USER_ID"),
+                article_id: "",
+                iscollection: "",
+            },
+            addnumber:{ //增加收藏数量
+                id:"",
+                collect_number:"",
             }
         }
     },
@@ -136,6 +157,10 @@ export default {
                 this.axios.post('/addcommentnum',this.addcomnumber).then(res=>{})
                 // 清空输入框
                 this.commentAll.comment = ''
+
+                setTimeout(()=>{
+                  this.reload();
+                 },1000)
             })
         },
         // 添加关注
@@ -163,7 +188,9 @@ export default {
                     {
                         Toast.success('关注成功');
                     }
-                        
+                      setTimeout(()=>{
+                        this.reload();
+                     },1000)     
                 })
 
             }
@@ -175,6 +202,95 @@ export default {
               if(res.data.status_code==200){
                    Toast.success('取消关注成功');
               }
+                setTimeout(()=>{
+                  this.reload();
+                 },1000)
+            })          
+        },
+        // 点赞
+        switchbgiup(){
+            if(this.details.goodup && this.details.goodup.isgoodup == 0 ) {
+                this.gree.isgoodup = '1'
+                this.axios.post("/addagree", {
+                    id:this.article_id,
+                    goods_number: this.details.goods_number + 1
+                })
+            } else if(this.details.goodup && this.details.goodup.isgoodup == 1) {
+                this.gree.isgoodup = '0'
+                this.axios.post("/addagree", {
+                    id:this.article_id,
+                    goods_number: this.details.goods_number - 1
+                })
+            } else if(this.details.goodup && this.details.goodup.isgoodup == 3 || this.details.goodup.isgoodup == 2) {
+                this.gree.isgoodup = '1'
+                this.axios.post("/addagree", {
+                    id:this.article_id,
+                    goods_number: this.details.goods_number + 1
+                })
+                this.axios.post("/addnegative", {
+                    id:this.article_id,
+                    negative_comment: this.details.negative_comment - 1
+                })
+            }
+            // 修改点赞状态
+            this.axios.post("/supports", this.gree).then(res => {
+                this.gree.isgoodup = this.details.goodup.isgoodup
+            });
+            setTimeout(()=>{
+                this.reload();
+            },1000)
+        },
+        // 差评
+        switchbgi(){
+            if(this.details.goodup && this.details.goodup.isgoodup == 1 || this.details.goodup.isgoodup == 0 ) {
+               this.gree.isgoodup = '2'
+                this.axios.post("/addnegative", {
+                    id:this.article_id,
+                    negative_comment: this.details.negative_comment + 1
+                })
+                this.axios.post("/addagree", {
+                    id:this.article_id,
+                    goods_number: this.details.goods_number - 1
+                })
+            } else if(this.details.goodup && this.details.goodup.isgoodup == 2) {
+                this.gree.isgoodup = '3'
+                this.axios.post("/addnegative", {
+                    id:this.article_id,
+                    negative_comment: this.details.negative_comment - 1
+                })
+            }
+            // 修改点赞状态
+            this.axios.post("/supports", this.gree).then(res => {
+                this.gree.isgoodup = this.details.goodup.isgoodup
+            });
+            setTimeout(()=>{
+                this.reload();
+            },1000)
+        },
+        // 文章收藏
+        forward(){
+            // 修改收藏数量
+            this.axios.post('/addcollenumber',this.addnumber).then(res=>{
+                this.addnumber.id = this.article_id,
+                this.addnumber.collect_number = this.details.collect_number - 1
+            })
+            // 修改收藏状态
+            this.axios.post('/collection',this.collect).then(res=>{
+                this.collect.iscollection = '0'
+                this.collect.article_id = this.article_id;
+            })
+        },
+        cancelforward () {
+           // 修改收藏数量
+            this.axios.post('/addcollenumber',this.addnumber).then(res=>{
+                this.addnumber.id = this.article_id,
+                this.addnumber.collect_number = this.details.collect_number + 1
+                // console.log(res.data)
+            })
+            // 修改收藏状态
+            this.axios.post('/collection',this.collect).then(res=>{
+                this.collect.iscollection = '1'
+                this.collect.article_id = this.article_id;
             })
         }
     },
@@ -183,12 +299,24 @@ export default {
         this.axios.get('/details/'+this.$route.params.id)
         .then(res=>{
            this.details = res.data.data
+           console.log(this.details);
            //设置文章用户id
-        //    this.allid.other_id = this.details.user_id;
+           this.allid.other_id = this.details.user_id;
+           this.gree.article_id = this.details.id;
+        //    this.collect.article_id = this.details.id;
+           this.article_id = this.details.id;
+           this.bloguserid = res.data.data.user_id
            this.author = this.details.user_id;
                  // 获取文章作者信息
                 this.axios.get('/author/'+ res.data.data.user_id).then(res=>{
                     this.author = res.data.data
+                })
+                // 判断是否关注
+                 this.axios.get('/isfollow/'+localStorage.getItem("USER_ID")+'/'+res.data.data.user_id).then(res=>{
+                    if(res.data.data == 1)
+                    {
+                        this.isfollow = true;
+                    }
                 })
         })
 
@@ -196,9 +324,8 @@ export default {
          this.axios.get('/getcomment/'+this.$route.params.id)
         .then(res=>{
            this.comlist = res.data.data
-           
         })
-        
+
     }
 }
 </script>

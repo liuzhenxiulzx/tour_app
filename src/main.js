@@ -22,7 +22,7 @@ Vue.use(Upload);
 Vue.axios.defaults.baseURL = 'http://localhost:8999/api'
 // axios.defaults.headers.post["Content-type"]="application/json";
 // Vue.prototype.$axios=axios;
-
+// php -S localhost:8999 -t public
 Vue.config.productionTip = false
 
 new Vue({

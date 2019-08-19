@@ -13,46 +13,63 @@
         </span>
         <button class="button">更换头像</button>
       </div>
-
       <ul>
         <li>
           <div class="info-row">
             <span class="info-row-title">昵称</span>
-            <input type="text" class="info-row-text">
-          </div>
-        </li>
-        <li>
-          <div class="info-row">
-            <span class="info-row-title">昵称</span>
-            <input type="text" class="info-row-text">
+            <el-input
+              placeholder="请输入昵称"
+              v-model="inputname"
+              clearable>
+            </el-input>
           </div>
         </li>
         <li>
           <div class="info-row">
             <span class="info-row-title">年龄</span>
-            <!-- <input type="text" class="info-row-text"> -->
-            <wv-datetime-picker
-              v-model="pickerVisible"
-              type="date"
-              year-format="{value} 年"
-              month-format="{value} 月"
-              date-format="{value} 日">
-            </wv-datetime-picker>
+            <div>
+              <el-date-picker
+                v-model="valueege"
+                type="date"
+                placeholder="选择日期">
+              </el-date-picker>
+            </div>
           </div>
         </li>
         <li>
           <div class="info-row">
             <span class="info-row-title">邮箱</span>
-            <input type="text" class="info-row-text">
+            <el-input
+              placeholder="请输入邮箱"
+              v-model="inputemail"
+              clearable>
+            </el-input>
           </div>
         </li>
         <li>
           <div class="info-row">
             <span class="info-row-title">手机号</span>
-            <input type="text" class="info-row-text">
+            <el-input
+              placeholder="请输入手机号"
+              v-model="inputiPhone"
+              clearable>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <div class="info-row">
+            <span class="info-row-title">性别</span>
+            <div>
+              <template>
+                <el-radio v-model="radio" label="1">男</el-radio>
+                <el-radio v-model="radio" label="2">女</el-radio>
+              </template>
+            </div>
           </div>
         </li>
       </ul>
+      <div class="savebtn" @click="save">保存</div>
+
     </div>
   </div>
 </template>
@@ -63,9 +80,18 @@
 
 <script>
   export default {
+    data(){
+      return {
+        inputname:'',
+        inputemail:'',
+        valueege:'',
+        radio:'1',
+        inputiPhone:'',
+      }
+    },
     methods: {
-      openPicker() {
-        this.$refs.picker.open();
+      save(){
+        
       }
     }
   };
