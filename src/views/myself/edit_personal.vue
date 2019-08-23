@@ -19,52 +19,40 @@
             <span class="info-row-title">昵称</span>
             <el-input
               placeholder="请输入昵称"
-              v-model="inputname"
+              v-model="myselfnews.username"
               clearable>
             </el-input>
           </div>
         </li>
-        <li>
-          <div class="info-row">
-            <span class="info-row-title">年龄</span>
-            <div>
-              <el-date-picker
-                v-model="valueege"
-                type="date"
-                placeholder="选择日期">
-              </el-date-picker>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="info-row">
-            <span class="info-row-title">邮箱</span>
-            <el-input
-              placeholder="请输入邮箱"
-              v-model="inputemail"
-              clearable>
-            </el-input>
-          </div>
-        </li>
-        <li>
+       <li>
           <div class="info-row">
             <span class="info-row-title">手机号</span>
             <el-input
               placeholder="请输入手机号"
-              v-model="inputiPhone"
+              v-model="myselfnews.phone"
+              @blur.prevent="isphone"
               clearable>
             </el-input>
           </div>
         </li>
         <li>
           <div class="info-row">
-            <span class="info-row-title">性别</span>
-            <div>
-              <template>
-                <el-radio v-model="radio" label="1">男</el-radio>
-                <el-radio v-model="radio" label="2">女</el-radio>
-              </template>
-            </div>
+            <span class="info-row-title">原密码</span>
+            <el-input 
+               placeholder="请输入原密码" 
+               v-model="myselfnews.oldpassword"
+               show-password>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <div class="info-row">
+            <span class="info-row-title">新密码</span>
+            <el-input 
+               placeholder="请输入新密码" 
+               v-model="myselfnews.password"
+               show-password>
+            </el-input>
           </div>
         </li>
       </ul>
@@ -79,20 +67,74 @@
 </style>
 
 <script>
+import { Toast, Dialog } from "we-vue";
   export default {
     data(){
       return {
-        inputname:'',
-        inputemail:'',
-        valueege:'',
-        radio:'1',
-        inputiPhone:'',
+        dataNews: "",
+        id: localStorage.getItem("USER_ID"),
+        myselfnews: {
+          username:'',
+          oldpassword:'',
+          password:'',
+          phone:'',
+          id: localStorage.getItem("USER_ID"),
+        }
       }
     },
     methods: {
+      isphone(){
+        var reg = /(?:^1[3456789]|^9[28])\d{9}$/
+        var strPhone = reg.test(this.myselfnews.phone);
+        if(!strPhone){
+          Toast.fail({
+            duration: 1000,
+            message: "手机号格式不正确"
+          });
+        }
+      },
       save(){
-        
+          if(this.myselfnews.password){
+            this.axios.post('/Personalnews', this.myselfnews).then(res=>{
+              if (res.data.status_code == 404) {
+                  Toast.fail({
+                    duration: 1000,
+                    message: "原密码和输入的密码不一致！"
+                  });
+              } else if(res.data.status_code == 422) {
+                  Toast.fail({
+                    duration: 1000,
+                    message: "昵称过长"
+                  });
+              } else if(res.data.status_code == 200) { 
+                  Toast.success('修改成功');
+                  this.$router.push('/login');
+              }
+            })
+          } else {
+            this.axios.post('/Personalnews', this.myselfnews).then(res=>{
+              if (res.data.status_code == 404) {
+                  Toast.fail({
+                    duration: 1000,
+                    message: "原密码和输入的密码不一致！"
+                  });
+              } else if(res.data.status_code == 422) {
+                  Toast.fail({
+                    duration: 1000,
+                    message: "昵称长度至少为三个字符"
+                  });
+              } else if(res.data.status_code == 200) { 
+                  Toast.success('修改成功');
+                  this.$router.push('/myself');
+              }
+            })
+          }
       }
-    }
+    },
+    created:function(){
+        this.axios.get('/personalName/'+this.id).then(res=>{
+          this.dataNews = res.data.data;
+        })
+      }
   };
 </script>

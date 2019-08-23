@@ -47,7 +47,7 @@
           <div class="line"></div>
           <div class="user">
             <img :src="v.blogauthor.header" alt>
-            <span>{{v.blogauthor.username}}</span>
+            <div id="username">{{v.blogauthor.username}}</div>
           </div>
         </li>
       </ul>

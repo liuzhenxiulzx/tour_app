@@ -131,10 +131,10 @@ export default {
                 article_id: "",
                 iscollection: "",
             },
-            addnumber:{ //增加收藏数量
-                id:"",
-                collect_number:"",
-            }
+            // addnumber:{ //增加收藏数量
+            //     id:"",
+            //     collect_number:"",
+            // }
         }
     },
     methods:{
@@ -269,29 +269,35 @@ export default {
         },
         // 文章收藏
         forward(){
+            this.collect.iscollection = '0'
             // 修改收藏数量
-            this.axios.post('/addcollenumber',this.addnumber).then(res=>{
-                this.addnumber.id = this.article_id,
-                this.addnumber.collect_number = this.details.collect_number - 1
-            })
+             this.axios.post("/addcollenumber", {
+                 id:this.article_id,
+                 collect_number: this.details.collect_number - 1
+             })
             // 修改收藏状态
             this.axios.post('/collection',this.collect).then(res=>{
-                this.collect.iscollection = '0'
-                this.collect.article_id = this.article_id;
+                this.collect.iscollection = this.details.collections.iscollection
             })
+            setTimeout(()=>{
+                this.reload();
+            },1000)
         },
+        //取消收藏
         cancelforward () {
+            this.collect.iscollection = '1'
            // 修改收藏数量
-            this.axios.post('/addcollenumber',this.addnumber).then(res=>{
-                this.addnumber.id = this.article_id,
-                this.addnumber.collect_number = this.details.collect_number + 1
-                // console.log(res.data)
-            })
+            this.axios.post("/addcollenumber", {
+                 id:this.article_id,
+                 collect_number: this.details.collect_number + 1
+             })
             // 修改收藏状态
             this.axios.post('/collection',this.collect).then(res=>{
-                this.collect.iscollection = '1'
-                this.collect.article_id = this.article_id;
+                this.collect.iscollection = this.details.collections.iscollection
             })
+            setTimeout(()=>{
+                this.reload();
+            },1000)
         }
     },
     created:function(){
@@ -303,7 +309,7 @@ export default {
            //设置文章用户id
            this.allid.other_id = this.details.user_id;
            this.gree.article_id = this.details.id;
-        //    this.collect.article_id = this.details.id;
+           this.collect.article_id = this.details.id;
            this.article_id = this.details.id;
            this.bloguserid = res.data.data.user_id
            this.author = this.details.user_id;

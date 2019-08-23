@@ -23,7 +23,7 @@
 			</div>
 			<div class="gologin">
 				<p>已有账户？</p>
-				<a href="#">&nbsp;马上登陆</a>
+				<a @click="login()">&nbsp;马上登陆</a>
 			</div>
 		</div>
     </div>
@@ -73,6 +73,9 @@ export default {
 					})
 				}
 			})
+		},
+		login(){
+			this.$router.push('/login');
 		}
 	}	
 	   

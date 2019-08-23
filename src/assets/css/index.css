@@ -59,7 +59,8 @@ ul li img{
 .activebgc  a p{
     color: yellow;
 }
-.activebgc  a img{
+.activebgc  a #imgs{
+    z-index: 100;
     width: 1.9rem;
     height: 1.9rem;
     display:block;
@@ -122,7 +123,7 @@ header img{
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2; 
     margin-left: 0.5rem;
-    padding-right: 0.35rem;
+    padding: 0.35rem;
 }
 .line{
     width: 90%;
@@ -147,7 +148,7 @@ header img{
     margin-left: 1rem;
     display: inline;
 }
-.user span{
+.user #username{
     display: inline-block;
     font-size: 1.2rem;
     vertical-align:middle;

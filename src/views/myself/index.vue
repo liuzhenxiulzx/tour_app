@@ -9,7 +9,7 @@
         <!-- 头像 -->
         <img id="headimg" src="../../assets/images/head.jpg" alt>
         <!-- 用户名 -->
-        <span>夏目南生</span>
+        <span>{{dataNews.username}}</span>
         <div class="edit">
           <router-link to="/edit_personal">编辑个人资料</router-link>
         </div>
@@ -51,3 +51,20 @@
 <style scoped>
 @import "../../assets/css/myself.css";
 </style>
+
+<script>
+export default {
+  data(){
+    return {
+      id: localStorage.getItem("USER_ID"),
+      dataNews: "",
+    }
+  },
+  created:function(){
+    this.axios.get('/personalName/'+this.id).then(res=>{
+      this.dataNews = res.data.data;
+    })
+  }
+}
+</script>
+
