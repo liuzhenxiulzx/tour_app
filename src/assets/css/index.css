@@ -80,6 +80,39 @@ header img{
     width: 100%;
     height: 100%;
 }
+.mydata{
+    float: left;
+}
+.mydata img{
+    display: inline-block;
+    margin: 4px 0 0 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 17px;
+}
+.myname{
+    font-size:1em;
+    line-height: 43px;
+    color: #000;
+    font-family:'楷体';
+    font-weight: 550;
+    margin: 1rem auto;
+    width: 100%;
+    text-align: center;
+}
+.indexnav a{
+    font-family:'楷体';
+}
+.indexnav {
+    width: 100%;
+    height: 43px;
+    text-align: center;
+}
+.indexnav .btnlogin{
+    float: right;
+    line-height: 43px;
+    margin-right: 10px;
+}
 /* 导航部分 */
 .nav{
     width: 100%;
@@ -95,11 +128,16 @@ header img{
     height: 100%;
     margin: 1.1rem auto; 
 }
+.content ul{
+    overflow: hidden;
+}
 .content ul li{
     list-style: none;
     width: 48.4%;
     background-color: #fff;
     float: right;
+    overflow: hidden;
+    display:inline-block;
     margin-bottom: 12px;
     border-radius: 0.8rem;
 }
@@ -107,10 +145,25 @@ header img{
     list-style: none;
     background-color: #fff;
     float: left;
+    overflow: hidden;
+    display:inline-block;
     margin-bottom: 12px;
 }
-.content .cent_abstract{
-    /* margin-right: 0px; */
+#datatime{
+    float: right;
+    display: inline-block;
+    font-size: 1.2rem;
+    vertical-align:middle;
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+}
+.cent_img #centartimg {
+    height: 189px;
+    width: 189px;
+}
+.cent_img #centartimgtwo {
+    height: 189px;
+    width: 189px;
 }
 .cent_abstract .cent_img img{
     width: 100%;
@@ -137,7 +190,7 @@ header img{
 
 
 .user{
-    width: 100%;
+    width: 95%;
     height: 10%;
     margin-bottom: 4px;
 }
@@ -187,10 +240,6 @@ header img{
     margin-right: 1rem;
     margin-top: 0.5rem;
     color:#ccc;
-    /* display: inline-block;
-    font-size: 1.2rem;
-    vertical-align:middle;
-    margin-left: 1rem; */
 }
 
 

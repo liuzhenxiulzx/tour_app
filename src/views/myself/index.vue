@@ -4,7 +4,8 @@
       <div class="photo">
         <!-- 照片墙 -->
         <div class="photo_wall">
-          <img :src="dataNews.backgroundimg" alt>
+          <img v-if="dataNews.backgroundimg" :src="dataNews.backgroundimg" alt>
+          <img v-else src="../../assets/images/backgroundimg.jpg" alt>
           <el-upload
             class="upload-demo"
             :action="domain"
@@ -18,11 +19,15 @@
           </el-upload>
         </div>
         <!-- 头像 -->
-        <img id="headimg" :src="dataNews.header" alt>
+        <img v-if="dataNews.header" id="headimg" :src="dataNews.header" alt>
+        <img v-else id="headimg" src="../../assets/images/header.jpg" alt>
         <!-- 用户名 -->
         <span class="username">{{dataNews.username}}</span>
-        <div class="edit">
+        <div class="edit" v-if="dataNews.header">
           <router-link to="/edit_personal">编辑个人资料</router-link>
+        </div>
+        <div class="edit" v-else @click="editnews">
+          <router-link to="">编辑个人资料</router-link>
         </div>
       </div>
     </header>
@@ -63,6 +68,7 @@
 </style>
 
 <script>
+import { Toast, Dialog } from "we-vue";
 export default {
   inject:['reload'],
   data(){
@@ -79,7 +85,16 @@ export default {
     }
   },
   methods: {
-        // 上传图片到七牛云
+    editnews(){
+      if(!localStorage.getItem("USER_ID")){
+        console.log(localStorage.getItem("USER_ID"))
+          Toast.fail({
+            duration: 1000,
+            message: "请登录后修改"
+          });
+      }
+    },
+    // 上传图片到七牛云
     upqiniu (req) {
       const config = {
         headers: {'Content-Type': 'multipart/form-data'}
@@ -103,7 +118,6 @@ export default {
             this.dataNews.backgroundimg = 'http://' + this.qiniuaddr + '/' + res.data.key;
             this.savebagkimg.backgroundimg = 'http://' + this.qiniuaddr + '/' + res.data.key;
             this.axios.post("/backgroundimg", this.savebagkimg).then(res=> {
-              console.log(22);
               setTimeout(()=>{
                  this.reload();
               },1000)

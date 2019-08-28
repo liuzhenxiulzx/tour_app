@@ -64,81 +64,87 @@ export default {
   methods: {
    
     send(){
+      if(localStorage.getItem("USER_ID")){
       // 将图片数组转化为字符串保存
       this.blog.article_img = this.blog.article_img.join(";");
-      
-      this.axios.post("/article", this.blog).then(res => {
-        if (res.data.status_code == 422) 
-        {
-            if (res.data.errors.user_id) 
-            {
-              Toast.fail({
-                duration: 1000,
-                message: "请先登录"
-              });
-            }
+        this.axios.post("/article", this.blog).then(res => {
+          if (res.data.status_code == 422) 
+          {
+              if (res.data.errors.user_id) 
+              {
+                Toast.fail({
+                  duration: 1000,
+                  message: "请先登录"
+                });
+              }
 
-            if (res.data.errors.content) 
-            {
-              Toast.fail({
-                duration: 1000,
-                message: "你还没有书写内容或上传图片哦！"
-              });
-            }
+              if (res.data.errors.content) 
+              {
+                Toast.fail({
+                  duration: 1000,
+                  message: "你还没有书写内容或上传图片哦！"
+                });
+              }
 
-            if (res.data.errors.article_img) 
-            {
-              Toast.fail({
-                duration: 1000,
-                message: "你还没有上传图片哦！"
-              });
-            }
-        }
-        else
-        {
-            if (res.data.status_code == 200) {
-              Toast.success("发表成功");
-            }
-            this.$router.push('/');
-        }
+              if (res.data.errors.article_img) 
+              {
+                Toast.fail({
+                  duration: 1000,
+                  message: "你还没有上传图片哦！"
+                });
+              }
+          }
+          else
+          {
+              if (res.data.status_code == 200) {
+                Toast.success("发表成功");
+              }
+              this.$router.push('/');
+          }
 
-      });
+        });
+      } else {
+          Toast.fail({
+            duration: 1000,
+            message: "请先登录"
+          });
+      }
 
     },
 
 
     // 上传图片到七牛云
     upqiniu (req) {
-      const config = {
-        headers: {'Content-Type': 'multipart/form-data'}
-      }
-      let filetype = ''
-      if (req.file.type === 'image/png') {
-        filetype = 'png'
-      } else {
-        filetype = 'jpg'
-      }
-      
-      
-      // 重命名要上传的文件
-      const keyname = 'tour' + new Date() + Math.floor(Math.random() * 100) + '.' + filetype
-      // 从后端获取上传凭证token
-      this.axios.get('/token').then(res => {
-        const formdata = new FormData()
-        formdata.append('file', req.file)
-        formdata.append('token', res.data.data)
-        formdata.append('key', keyname)
-        // 获取到凭证之后再将文件上传到七牛云空间
-        this.axios.post(this.domain, formdata,config).then(res => {
-          // console.log(res)
-          this.blog.article_img.push('http://' + this.qiniuaddr + '/' + res.data.key);
-          this.key = res.data.key
-          
-        }).catch(error=>{
-          console.log(error)
+      // 登录后上传
+      if(localStorage.getItem("USER_ID")){ 
+        const config = {
+          headers: {'Content-Type': 'multipart/form-data'}
+        }
+        let filetype = ''
+        if (req.file.type === 'image/png') {
+          filetype = 'png'
+        } else {
+          filetype = 'jpg'
+        }
+        // 重命名要上传的文件
+        const keyname = 'tour' + new Date() + Math.floor(Math.random() * 100) + '.' + filetype
+        // 从后端获取上传凭证token
+        this.axios.get('/token').then(res => {
+          const formdata = new FormData()
+          formdata.append('file', req.file)
+          formdata.append('token', res.data.data)
+          formdata.append('key', keyname)
+          // 获取到凭证之后再将文件上传到七牛云空间
+          this.axios.post(this.domain, formdata,config).then(res => {
+            // console.log(res)
+            this.blog.article_img.push('http://' + this.qiniuaddr + '/' + res.data.key);
+            this.key = res.data.key
+            
+          }).catch(error=>{
+            console.log(error)
+          })
         })
-      })
-
+      }
     },
     // 验证文件合法性
     beforeUpload (file) {

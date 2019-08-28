@@ -1,20 +1,19 @@
 <template>
   <div>
     <header>
-      <wv-swipe :height="150" :autoplay="3000">
-        <wv-swipe-item>
-          <img src="../../assets/images/lunbo_01.jpg">
-        </wv-swipe-item>
-        <wv-swipe-item>
-          <img src="../../assets/images/lunbo_02.jpg">
-        </wv-swipe-item>
-        <wv-swipe-item>
-          <img src="../../assets/images/lunbo_03.jpg">
-        </wv-swipe-item>
-        <wv-swipe-item>
-          <img src="../../assets/images/lunbo_04.jpg">
-        </wv-swipe-item>
-      </wv-swipe>
+      <div class="indexnav">
+        <div class="mydata">
+          <img v-if="userdata.header" :src="userdata.header">
+          <img v-else src="../../assets/images/header.jpg" alt>
+        </div>
+      <a class="myname">{{userdata.username}}</a>
+      <router-link to="/login" class="return" v-if="id">
+         <a class="btnlogin" @click="outlogin">退出登录</a>
+      </router-link>
+      <router-link to="/login" class="return" v-else>
+         <a class="btnlogin">请登录</a>
+      </router-link>
+      </div>
     </header>
 
     <div class="content">
@@ -22,32 +21,18 @@
         <li v-for="(v,k) in blog" :key="k">
           <router-link :to="'/details/'+v.id" class="cent_abstract">
             <div class="cent_img">
-              <img v-if="v.article_img.search(';')" :src="v.article_img.substring('0',v.article_img.indexOf(';'))" alt>
-              <img :src="v.article_img" width="200px" height="200px" alt>
+              <img id="centartimg" v-if="v.article_img.indexOf(';') > -1" :src="v.article_img.substring('0',v.article_img.indexOf(';'))" height="189px" width="189px" alt>
+              <img id="centartimgtwo" v-if="v.article_img.indexOf(';') == -1" :src="v.article_img" height="189px" width="189px" alt>
             </div>
             <div class="briefly">
               <a href="#">{{v.content}}</a>
             </div>
           </router-link>
-          <!-- <div class="operation">
-            <div class="comment">
-              <img  v-if="v.goodup" src="../../assets/images/like.png" @click="switchbgi(v.id,k,v)" alt> 
-              <img  v-else src="../../assets/images/index_like.png" @click="switchbgi(v.id,k,v)" alt>
-              <span>{{v.goods_number}}</span>
-            </div>
-            <div class="thumbs-up">
-              <img src="../../assets/images/comment29.png">
-              <span>{{v.comment_number}}</span>
-            </div>
-            <div class="share">
-              <img src="../../assets/images/collectionicon.png" @click="forward(v.id,k)">
-              <span>{{v.collect_number}}</span>
-            </div>
-          </div> -->
           <div class="line"></div>
           <div class="user">
             <img :src="v.blogauthor.header" alt>
             <div id="username">{{v.blogauthor.username}}</div>
+            <div id="datatime">{{v.created_at.substring(0,10)}}</div>
           </div>
         </li>
       </ul>
@@ -69,16 +54,9 @@ export default {
    data() {
     return {
       blog: [],
-      // agree: {
-      //   upuser_id: localStorage.getItem("USER_ID"),
-      //   article_id: "",
-      //   isgoodup: "" //是否点赞
-      // },
-      allgoods:[], //该用户所有点赞信息
-      // collect:{ //收藏信息
-      //   user_id: localStorage.getItem("USER_ID"),
-      //   article_id: "",
-      // },
+      userdata: '',
+      id: localStorage.getItem("USER_ID"),
+      allgoods:[], 
       uid:localStorage.getItem("USER_ID"),
       addnumber:{ //增加收藏数量
         id:"",
@@ -96,8 +74,16 @@ export default {
     this.axios.get("/condition/"+this.uid).then(res=>{
       this.allgoods = res.data.data;
     })
+    // 获取个人信息
+    this.axios.get('/personalName/'+this.id).then(res=>{
+      this.userdata = res.data.data;
+    })
   },
   methods: {
+    outlogin(){
+      localStorage.removeItem("USER_ID");
+      localStorage.removeItem("ACCESS_TOKEN");
+    },
     // 文章收藏
     forward(key,k){
        this.collect.article_id = key;
@@ -147,61 +133,6 @@ export default {
 
         })
     },
-    // switchbgi(key, item,v) {
-    //   // console.log(v.goodup.isgoodup)
-    //    this.agree.article_id = key;
-    // //   // 判断是否点赞
-    //   if(this.blog[item].goodup){
-         
-    //       if (this.blog[item].goodup.isgoodup == 0) 
-
-    //       {
-    //         this.agree.isgoodup = "1";//状态改为1，表示已经点击
-          
-    //         this.blog[item].goods_number = this.blog[item].goods_number + 1;
-    //         // console.log(0)
-    //       } 
-          
-    //       if (this.blog[item].goodup.isgoodup == 1)      
-    //       {
-    //         this.agree.isgoodup = "0";
-    //         // 不为负数
-    //         if(this.blog[item].goods_number > 0)
-    //         {
-    //           this.blog[item].goods_number = this.blog[item].goods_number - 1;
-    //         }
-    //         else if(this.blog[item].goods_number = 0)
-    //         {
-    //             this.blog[item].goods_number = this.blog[item].goods_number + 1;
-    //         }
-    //       }  
-
-    //     }
-    //     else
-    //     {
-    //       // 如没有点赞
-    //       this.agree.isgoodup = '1';
-    //       this.blog[item].goods_number = this.blog[item].goods_number + 1;
-    //     }
-    
-    //     //3.修改点赞对应的文章的点赞状态
-    //     this.axios.post("/supports", this.agree).then(res => {
-    //       this.agree.isgoodup = res.data.data.isgoodup;
-    //     });
-
-    //     // 4.修改表中点赞数量
-    //     this.axios.post("/addagree", {
-    //       id:key,
-    //       goods_number: this.blog[item].goods_number
-    //     })
-
-    //     setTimeout(()=>{
-    //               this.reload();
-    //     },1000)
-    // },
-
-   
-
   }
 };
 </script>
