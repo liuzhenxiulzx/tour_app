@@ -16,6 +16,7 @@
         list-type="picture-card"
         :before-upload="beforeUpload"
         :auto-upload="true"
+        accept="image/jpeg,image/gif,image/png"
         :http-request="upqiniu"
         :on-remove="moveimg"
       >
@@ -50,7 +51,7 @@ export default {
       },
       dialogVisible: false,
       domain: "http://upload.qiniup.com",
-      qiniuaddr: "pn3sdg7c5.bkt.clouddn.com", // 七牛云的图片外链地址
+      qiniuaddr: "qiniuyun.liuzhenxiu.cn", // 七牛云的图片外链地址
       imagesurl:'',
       key:''
     };
@@ -108,7 +109,6 @@ export default {
 
     // 上传图片到七牛云
     upqiniu (req) {
-      // console.log(req)    
       const config = {
         headers: {'Content-Type': 'multipart/form-data'}
       }
@@ -158,13 +158,7 @@ export default {
         const suffx = fileList.length -1;
         this.blog.article_img.splice(suffx,1)
     }
-
-
-
   },
-
-
-  
 };
 </script>
 

@@ -23,7 +23,7 @@
           <router-link :to="'/details/'+v.id" class="cent_abstract">
             <div class="cent_img">
               <img v-if="v.article_img.search(';')" :src="v.article_img.substring('0',v.article_img.indexOf(';'))" alt>
-              <img  :src="v.article_img" alt>
+              <img :src="v.article_img" width="200px" height="200px" alt>
             </div>
             <div class="briefly">
               <a href="#">{{v.content}}</a>

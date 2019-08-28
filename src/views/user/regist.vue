@@ -37,6 +37,7 @@ export default {
 			fromdata:{
 				username:'',
 				password:'',
+				header: 'http://qiniuyun.liuzhenxiu.cn/f8d919aa2bd20f6f93e0a3a97be55fc1.jpg',
 				password_confirmation:'',
 				phone:'',
 			}

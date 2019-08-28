@@ -19,7 +19,7 @@
     border-radius: 30px;
     margin-bottom: 25px;
 }
-span{
+.form-control span{
     margin-left: 5px;
     display: inline-block;
     text-align: center;

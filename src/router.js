@@ -51,7 +51,7 @@ export default new Router({
           meta:{
             title:'myself'
           },
-          component: () => import('./views/myself/index.vue')
+          component: () => import('./views/myself/index.vue'),
         },
         {
           path: '/privatenews',
@@ -122,6 +122,14 @@ export default new Router({
         title:'我关注的人'
       },
       component: () => import('./views/myself/myfollow.vue')
+    },
+    {
+      path: '/myarticle',
+      name: 'myarticle',
+      meta:{
+        title:'我的作品'
+      },
+      component: () => import('./views/myself/myarticle.vue')
     },
     
   ]

@@ -11,8 +11,9 @@
     <div class="blog_conten">
       <div class="wrap">
         {{details.content}}
-         <div>
-          <img :src="details.article_img" width="295px" height="250px" alt="">
+         <div v-if="details.article_img.search(';')">
+          <img v-if="details.article_img.search(';')" :src="details.article_img.substring('0',details.article_img.indexOf(';'))" alt>
+          <img :src="details.article_img" width="295px" height="250px" alt>
         </div>
       </div>
      

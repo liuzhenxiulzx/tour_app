@@ -28,7 +28,7 @@ photo .photo_wall img{
     top: 7em;
     left: 37%;
 }
-header .photo span{
+header .photo .username{
     width: 100%;
     font-size: 2rem;
     font-family:'楷体';
@@ -90,6 +90,15 @@ header .photo span{
 }
 .list{
     padding-bottom: 7rem;
+}
+#backgroundimg{
+    padding: 1.5px;
+    margin-left: 10px;
+    float: left;
+    font-size: 12px;
+    background-color: #faebd700;
+    margin-top: -62px;
+    color: #fff;
 }
 /* 个人信息编辑页 */
 header{
@@ -246,4 +255,8 @@ header span{
     float: right;
     margin-right: 1.5rem;
     margin-top: 3rem;
+}
+/* 我的作品 */
+.myarticlebody{
+    height: 100px;
 }
