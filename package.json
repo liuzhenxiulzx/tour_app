@@ -14,7 +14,7 @@
     "jquery-weui": "^1.2.1",
     "popper.js": "^1.14.6",
     "qiniu-js": "^2.5.3",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.5.0",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
     "vue-jsonp": "^0.1.8",
